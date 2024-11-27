@@ -16,18 +16,14 @@ const EditNewsPage: React.FC = () => {
   const [news, setNews] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log(id);
   // Fetch detail of the news by ID
   const fetchNewsDetail = async () => {
     try {
-      if (!id) {
-        alert("Invalid news ID.");
-        setLoading(false);
-        return;
-      }
-
+      console.log(id);
       // Gọi API để lấy bài viết theo `id`
       const response = await axios.get(`/api/admin/news/${id}`);
+      console.log(response.data);
+
       if (response.data) {
         setNews(response.data); // Lưu dữ liệu bài viết vào state
       } else {
@@ -52,7 +48,7 @@ const EditNewsPage: React.FC = () => {
 
     try {
       // Gửi yêu cầu PUT để cập nhật bài viết theo `id`
-      await axios.put(`/api/admin/news/${id}`, news);
+      await axios.post(`/api/admin/news/edit/${id}`, news);
       alert("News updated successfully!");
       navigate("/admin"); // Redirect to admin page after updating
     } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Dùng Link để điều hướng
+import { Link, useParams } from "react-router-dom"; // Dùng Link để điều hướng
 import axios from "../AxiosInstance"; // Đảm bảo axios đã được cấu hình đúng
 
 interface NewsItem {
@@ -12,15 +12,17 @@ interface NewsItem {
 }
 
 const NewsList: React.FC = () => {
+  const { typeNews } = useParams<{ typeNews: string }>();
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get<NewsItem[]>("/api/client/home"); // Lấy danh sách bài viết
-        setNewsItems(response.data);
-        console.log(response.data);
+        const response = await axios.get(`/api/client/news/${typeNews}`); // Lấy danh sách bài viết
+        const data = response.data;
+        console.log(data);
+        setNewsItems(data);
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch news:", error);

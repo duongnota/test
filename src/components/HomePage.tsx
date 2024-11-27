@@ -17,8 +17,6 @@ const Home: React.FC = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get<NewsItem[]>("/api/client/home");
-        console.log(response);
-
         setNewsItems(response.data);
         setLoading(false);
       } catch (error) {

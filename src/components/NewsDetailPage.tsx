@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Sử dụng useParams để lấy tham số từ URL
-import axios from "../AxiosInstance"; // Đảm bảo axios đã được cấu hình đúng
+import { useParams } from "react-router-dom";
+import axios from "../AxiosInstance";
 
 interface NewsDetail {
   title: string;
@@ -14,9 +14,12 @@ const NewsDetailPage: React.FC = () => {
   const [news, setNews] = useState<NewsDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  console.log("type news >>> " + typeNews);
+
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
+        console.log("type news >>>>" + typeNews);
         const response = await axios.get(`/api/news/${typeNews}`); // Lấy chi tiết bài viết dựa trên typeNews
         setNews(response.data);
         setLoading(false);

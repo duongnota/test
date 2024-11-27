@@ -18,13 +18,8 @@ const NewsContent: React.FC = () => {
   // Fetch news detail by ID
   const fetchNewsDetail = async () => {
     try {
-      if (!id) {
-        alert("Invalid news ID.");
-        setLoading(false);
-        return;
-      }
-
-      const response = await axios.get(`/api/admin/news/${id}`);
+      console.log(id);
+      const response = await axios.get(`/api/client/infor/${id}`);
       if (response.data) {
         setNews(response.data); // Lưu dữ liệu bài viết vào state
       } else {

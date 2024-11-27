@@ -34,7 +34,7 @@ const AdminPage: React.FC = () => {
   const handleDelete = async (_id: string) => {
     // Sử dụng _id thay vì typeNews
     try {
-      await axios.delete(`/api/admin/news/${_id}`); // Gửi yêu cầu DELETE để xoá bài viết
+      await axios.delete(`/api/admin/delete/${_id}`); // Gửi yêu cầu DELETE để xoá bài viết
       setNewsItems(newsItems.filter((news) => news._id !== _id)); // Xoá bài viết khỏi state
       alert("News deleted successfully!");
     } catch (error) {
